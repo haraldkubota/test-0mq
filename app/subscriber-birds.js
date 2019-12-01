@@ -1,4 +1,4 @@
-// Subscribe to "bidrs"
+// Subscribe to "bidrs" using v5 syntax
 
 const zmq = require("zeromq/v5-compat");
 

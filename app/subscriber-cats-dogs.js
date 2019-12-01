@@ -1,31 +1,37 @@
-// Subscribe to "cats" and "dogs"
+// Subscribe to "cats" and "dogs" using v6 syntax
 
-const zmq = require("zeromq/v5-compat");
+const zmq = require("zeromq");
 
-const subCats = zmq.socket("sub");
-subCats.connect("tcp://127.0.0.1:3000");
-subCats.subscribe("cats");
-console.log("Subscriber connected to port 3000");
+async function runCats() {
+    const subCats = new zmq.Subscriber();
+    subCats.connect("tcp://127.0.0.1:3000");
+    subCats.subscribe("cats");
+    console.log("Subscribing to cats connected to port 3000");
 
-subCats.on("message", function(topic, message) {
-    console.log(
-        "received a message related to:",
-        topic.toString('UTF8'),
-        "containing message:",
-        message.toString('UTF8')
-    );
-});
+    for await (const [topic, msg] of subCats) {
+        console.log(
+            "received a message related to:",
+            topic.toString('UTF8'),
+            "containing message:",
+            msg.toString('UTF8')
+        );
+    }
+}
+async function runDogs() {
+    const subDogs = new zmq.Subscriber();
+    subDogs.connect("tcp://127.0.0.1:3000");
+    subDogs.subscribe("dogs");
+    console.log("Subscribing to dogs connected to port 3000");
 
-const subDogs = zmq.socket("sub");
-subDogs.connect("tcp://127.0.0.1:3000");
-subDogs.subscribe("dogs");
-console.log("Subscriber connected to port 3000");
+    for await (const [topic, msg] of subDogs) {
+        console.log(
+            "received a message related to:",
+            topic.toString('UTF8'),
+            "containing message:",
+            msg.toString('UTF8')
+        );
+    }
+}
 
-subDogs.on("message", function(topic, message) {
-    console.log(
-        "messsage from ",
-        topic.toString('UTF8'),
-        "saying ",
-        message.toString('UTF8')
-    );
-});
+runCats();
+runDogs();
