@@ -1,0 +1,26 @@
+{
+  "name": "test0mq",
+  "version": "1.0.0",
+  "description": "Testing 0MQ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haraldkubota/test-0mq.git"
+  },
+  "keywords": [
+    "0mq",
+    "node.js"
+  ],
+  "author": "Harald Kubota",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/haraldkubota/test-0mq/issues"
+  },
+  "homepage": "https://github.com/haraldkubota/test-0mq#readme",
+  "dependencies": {
+    "zeromq": "^6.0.0-beta.5"
+  }
+}
